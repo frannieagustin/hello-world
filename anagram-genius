@@ -1,0 +1,10 @@
+public static int numberNeededAr(String a,String b) {
+        int[] af = new int[26];
+        int ops = 0;
+        for(int i = 0; i < a.length(); ++i) af[a.charAt(i) - 'a']++;
+        for(int i = 0; i < b.length(); ++i) af[b.charAt(i) - 'a']--;
+        for (int anAf : af) ops += Math.abs(anAf);
+        return ops;
+    }
+    
+    af(alphabetsFrequency) is the array created for 26 lower case letters from the english alphabets. It is declared a size of 26 values and by default all values are set to 0 in java. The first two (for) loops go through a string, char by char and use the af array to keep track of each char's occurrence. af[a.charAt(i) - 'a']++ is increasing the value of the array at the index [a.charAt(i) minus 'a'], Since 'a' is 97, if a.charAt(i) was 'a', then the index would be [0] because 97-97. Same continues for 'b' which would be 98-97 indicating an index of [1]. This implementation makes good use of one array by using af[b.charAt(i) - 'a']-- to account for char matches between the two strings. Note that this is good programming practice instead of using nested loops which would have given a runtime of O(n^2) instead of its current linear runtime. A similar explanation has been given by @ChrisDoesCode and the above explanation has been modified according to the code. This was actually implemented by @cool_shark, i merely converted it from C++ to java.
