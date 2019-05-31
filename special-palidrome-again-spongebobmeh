@@ -11,33 +11,32 @@ public class Solution {
 // Complete the substrCount function below.
     static long substrCount(int n, String s) {
         int result = 0;
-        char[] arrS = s.toCharArray();
         int repeats = 0;
 
         for(int i=1; i<n-1; i++){
-            //System.out.println(arrS[i-1]+"=="+arrS[i+1]);
             System.out.println("index=="+i);
-
             //palindrome
-            if(arrS[i-1]==arrS[i+1]){
-                System.out.println("comparing::arrS[i-1]==arrS[i+1]::"+arrS[i-1]+"=="+arrS[i+1]);
+            if(s.charAt(i-1)==s.charAt(i+1)){
+                System.out.println("comparing::s.charAt(i-1)==s.charAt(i+1)::"+s.charAt(i-1)+"=="+s.charAt(i+1));
                 result++;
             }
 
             //repeatable char
-            if(arrS[i-1]==arrS[i]){
-                System.out.println("comparing::arrS[i-1]==arrS[i]::"+arrS[i-1]+"=="+arrS[i]);
+            if(s.charAt(i-1)==s.charAt(i)){
+                System.out.println("comparing::s.charAt(i-1)==s.charAt(i)::"+s.charAt(i-1)+"=="+s.charAt(i));
                 repeats++;
             }
 
             /*int test = n-2;
             //System.out.println(i+"=="+test);
             if(i==test){
-                if(arrS[i]==arrS[i+1]){
-                    result++;
+                if(s.charAt(i)==s.charAt(i+1)){
+                    repeats++;
                 }
             }*/
-
+            
+            System.out.println("result=="+result);
+            System.out.println("repeats=="+repeats);
             result += repeats * (repeats+1) / 2;
             
             }
