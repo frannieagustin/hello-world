@@ -1,0 +1,96 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the hourglassSum function below.
+    static int hourglassSum(int[][] arr) {
+        //System.out.println(java.util.Arrays.toString(arr));
+
+        int result = 0;
+        int offset = 3;
+
+        int outerX = 0;
+        int outerY = 0;
+        int innerX = 0;
+        int innerY = 0;
+
+        while(outerX<4){
+            //System.out.println("outerX="+outerX);
+            
+            while(outerY<4){
+                //System.out.println("outerY="+outerY);
+                innerX = outerX;
+
+                //per hourglass
+                StringBuffer hourglassSB = new StringBuffer();
+                int sum = 0;
+                while(innerX<outerX+offset){
+                    //System.out.println("innerX="+innerX);
+                    innerY = outerY;
+
+                    if(innerX==outerX+1){
+                        //hourglassSB.append("X");
+                        //hourglassSB.append(arr[innerX][innerY+1]);
+                        //hourglassSB.append("X");
+                        sum += arr[innerX][innerY+1];
+                        innerX++;
+                    }
+                    else{
+                        while(innerY<outerY+offset){
+                            //hourglassSB.append(arr[innerX][innerY]);
+                            //System.out.println("innerY="+innerY);
+                            sum += arr[innerX][innerY];
+
+                            innerY++;
+                            if(innerY==outerY+offset){
+                                innerX++;
+                            }
+                        }
+                    }
+                    //hourglassSB.append("\r\n");
+                }
+                //System.out.println("sum="+sum);
+                //System.out.println(hourglassSB.toString());
+                result = (sum>result)? sum : result;
+
+                outerY++;
+            }
+            outerX++;
+            outerY=0;
+        }
+        return result;
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int[][] arr = new int[6][6];
+
+        for (int i = 0; i < 6; i++) {
+            String[] arrRowItems = scanner.nextLine().split(" ");
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            for (int j = 0; j < 6; j++) {
+                int arrItem = Integer.parseInt(arrRowItems[j]);
+                arr[i][j] = arrItem;
+            }
+        }
+
+        int result = hourglassSum(arr);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
